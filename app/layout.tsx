@@ -1,6 +1,8 @@
-import "./globals.css";
 import { EffectorRouterProvider } from "@/providers/EffectorRouterProvider/EffectorRouterProvider";
 import { AnimeProvider } from "@/providers/ApolloProvider/AnimeProvider";
+import Header from "@/components/features/Header";
+
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -9,10 +11,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <AnimeProvider>
-          <EffectorRouterProvider>{children}</EffectorRouterProvider>
-        </AnimeProvider>
+      <body className="bg-black">
+        <Header />
+        <main className="relative overflow-hidden">
+          <AnimeProvider>
+            <EffectorRouterProvider>{children}</EffectorRouterProvider>
+          </AnimeProvider>
+        </main>
       </body>
     </html>
   );

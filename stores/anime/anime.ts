@@ -1,6 +1,5 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
 import { GET_ANIME } from '@/graphql/animeQueries';
-import { navigationTriggered } from '../router';
 import { Page, Media } from '@/graphql/generated/graphql';
 import { anilistClient } from '@/lib/apollo';
 
@@ -43,27 +42,9 @@ export const $anime = createStore<AnimeState>({
         error,
     }));
 
-// ✅ directly use .pending (already a Store<boolean>)
 export const $isLoading = fetchAnimeFx.pending;
 
-// 🔄 trigger effect when event dispatched
 sample({
     clock: fetchAnime,
     target: fetchAnimeFx,
-});
-
-// 🔄 navigate when finished
-sample({
-    clock: fetchAnimeFx.done,
-    fn: () => '/anime',
-    target: navigationTriggered,
-});
-
-// ✅ watch store changes instead of logging initial empty state
-$anime.watch((state) => {
-    console.log('Anime store updated:', state);
-});
-
-$isLoading.watch((loading) => {
-    console.log('Loading status:', loading);
 });
