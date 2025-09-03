@@ -1,12 +1,13 @@
-import { useUnit } from 'effector-react';
-import { $countries, fetchCountries, $isLoading } from './countries';
+import { useUnit, useGate } from 'effector-react';
+import { $countries, $isLoading, CountriesGate, fetchCountriesFx } from './countries';
 
 export const useCountries = () => {
   const [countriesState, loading] = useUnit([$countries, $isLoading]);
-  const fetchCountriesEvent = useUnit(fetchCountries);
+
+  useGate(CountriesGate);
 
   const refetch = () => {
-    fetchCountriesEvent();
+    fetchCountriesFx();
   };
 
   return {
