@@ -1,15 +1,18 @@
 "use client";
-import { useAllAnime } from "@/stores/anime/useAllAnime";
+
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getReadableTextColor } from "@/utils/getReadableTextColor";
+import AnimeDetailsInfo from "@/components/shared/AnimeDetailsInfo";
+import { cardInfo } from "@/const/card";
+import { useAnimeAll } from "@/stores/anime/useAnimeAll";
 
 const TopAnime = () => {
-  const { data: anime, loading } = useAllAnime();
-  console.log(anime, "anime");
+  const { data: anime } = useAnimeAll();
   const router = useRouter();
 
   return (
@@ -17,7 +20,7 @@ const TopAnime = () => {
       <div className="pt-14 xl:px-10 font-nunito flex justify-between">
         <h3 className="text-2xl font-medium text-white">
           <Star className="fill-green-500 text-green-500 inline mr-3" />
-          Popular Shows
+          Top 100
         </h3>
         <span className="text-green-500 underline text-lg font-medium">
           View all
@@ -26,17 +29,17 @@ const TopAnime = () => {
       {anime.slice(0, 10).map((anime, index) => (
         <div key={anime.id} className="flex gap-2 items-center">
           <span className="text-white text-xl">#{index + 1}</span>
-          <div className="bg-neutral-500/15 max-h-40 items-center sm:max-h-20 gap-2 aspect-video p-2 text-white w-full rounded-lg flex ">
-            <Image
-              src={anime?.coverImage?.large || ""}
-              width={48}
-              height={60}
-              alt="cover"
-              onClick={() => router.push(`/anime/${anime.id}`)}
-              className="object-contain h-full cursor-pointer"
-            />
-            <div className="flex justify-between flex-col">
-              <div>
+          <div className="bg-neutral-500/15 justify-between max-h-48 items-center md:max-h-20 gap-2 aspect-video p-2 text-white w-full rounded-lg flex ">
+            <div className="flex gap-4 items-center">
+              <Image
+                src={anime?.coverImage?.large || ""}
+                width={48}
+                height={60}
+                alt="cover"
+                onClick={() => router.push(`/anime/${anime.id}`)}
+                className="object-contain h-full cursor-pointer"
+              />
+              <div className="flex gap-2 justify-between flex-col">
                 <Link
                   href={`/anime/${anime.id}`}
                   style={
@@ -57,6 +60,9 @@ const TopAnime = () => {
                       className="p-0.5 text-sm "
                       style={{
                         backgroundColor: anime?.coverImage?.color || "#22C55E",
+                        color: getReadableTextColor(
+                          anime?.coverImage?.color || "#22C55E"
+                        ),
                       }}
                     >
                       {genre}
@@ -64,10 +70,11 @@ const TopAnime = () => {
                   ))}
                 </div>
               </div>
-              <div>
-                <span>{}</span>
-              </div>
             </div>
+            <AnimeDetailsInfo
+              items={cardInfo(anime)}
+              className="flex-row items-center justify-between hidden lg:flex"
+            />
           </div>
         </div>
       ))}

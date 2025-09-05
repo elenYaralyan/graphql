@@ -17,7 +17,7 @@ const AnimeTrailer: React.FC<Props> = ({ trailer }) => {
 
   return !showTrailer ? (
     <div
-      className="w-full max-w-2xl aspect-video rounded-2xl border-zinc-300 border-2 cursor-pointer relative overflow-hidden"
+      className="min-h-fit aspect-video w-full h-full   cursor-pointer relative overflow-hidden"
       role="button"
       tabIndex={0}
       aria-label="Play Trailer"
@@ -32,7 +32,7 @@ const AnimeTrailer: React.FC<Props> = ({ trailer }) => {
         fill
         src={trailerThumbnail}
         alt="Trailer Thumbnail"
-        className="object-cover w-full h-full rounded-md"
+        className="object-cover rounded-md"
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="bg-black/60 rounded-full p-4">
@@ -41,7 +41,7 @@ const AnimeTrailer: React.FC<Props> = ({ trailer }) => {
       </div>
     </div>
   ) : (
-    <div className="w-full max-w-2xl aspect-video rounded-2xl border-zinc-300 border-2  overflow-hidden">
+    <div className="min-h-fit aspect-video w-full h-full  rounded-2xl border-zinc-300 border-2  overflow-hidden">
       <iframe
         src={getTrailerLink(trailer) || ""}
         title="Trailer"

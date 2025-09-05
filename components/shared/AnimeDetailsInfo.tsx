@@ -1,28 +1,25 @@
 import React from "react";
-import { Media } from "@/graphql/generated/graphql";
+import { Maybe, Media } from "@/graphql/generated/graphql";
 import { cn } from "@/lib/utils";
 
-interface Props {
-  data: Media;
-  className?: string;
+interface InfoItem {
+  title: string;
+  value: string | Maybe<number> | undefined;
 }
 
-const AnimeDetailsInfo: React.FC<Props> = ({ data, className }) => (
-  <div className={cn("flex flex-col", className)}>
-    <span>Episodes</span>
-    <span className="text-zinc-500">{data.episodes}</span>
-    <span>Episode duration</span>
-    <span className="text-zinc-500">{data.duration}</span>
-    <span>Studios</span>
-    <span className="text-zinc-500">
-      {data?.studios?.nodes && data.studios.nodes.length > 0
-        ? data.studios.nodes[0]?.name
-        : "N/A"}
-    </span>
-    <span>Start Year</span>
-    <span className="text-zinc-500">{data.startDate?.year}</span>
-    <span>Status</span>
-    <span className="text-zinc-500">{data.status}</span>
+interface Props {
+  className?: string;
+  items: InfoItem[];
+}
+
+const AnimeDetailsInfo: React.FC<Props> = ({ className, items }) => (
+  <div className={cn("grid grid-rows-5 grid-cols-2 sm:gap-4", className)}>
+    {items.map(({ title, value }) => (
+      <div key={title} className="flex flex-col gap-2">
+        <span className="font-semibold">{title}</span>
+        <span className="text-zinc-500">{value ?? "N/A"}</span>
+      </div>
+    ))}
   </div>
 );
 
