@@ -14,9 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  query GetAnime($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      pageInfo {\n        total\n        perPage\n        currentPage\n        lastPage\n        hasNextPage\n      }\n      media(sort: SCORE_DESC, type: ANIME) {\n        id\n        rankings {\n        allTime\n        rank\n        format\n        context\n       }\n        title {\n          romaji\n          english\n          native\n        }\n        coverImage {\n          color\n          large\n          extraLarge\n        }\n        duration\n        genres\n      }\n    }\n  }\n": typeof types.GetAnimeDocument,
     "\n  query GetCountries {\n    countries {\n      code\n      name\n      emoji\n    }\n  }\n": typeof types.GetCountriesDocument,
 };
 const documents: Documents = {
+    "\n  query GetAnime($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      pageInfo {\n        total\n        perPage\n        currentPage\n        lastPage\n        hasNextPage\n      }\n      media(sort: SCORE_DESC, type: ANIME) {\n        id\n        rankings {\n        allTime\n        rank\n        format\n        context\n       }\n        title {\n          romaji\n          english\n          native\n        }\n        coverImage {\n          color\n          large\n          extraLarge\n        }\n        duration\n        genres\n      }\n    }\n  }\n": types.GetAnimeDocument,
     "\n  query GetCountries {\n    countries {\n      code\n      name\n      emoji\n    }\n  }\n": types.GetCountriesDocument,
 };
 
@@ -34,6 +36,10 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetAnime($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      pageInfo {\n        total\n        perPage\n        currentPage\n        lastPage\n        hasNextPage\n      }\n      media(sort: SCORE_DESC, type: ANIME) {\n        id\n        rankings {\n        allTime\n        rank\n        format\n        context\n       }\n        title {\n          romaji\n          english\n          native\n        }\n        coverImage {\n          color\n          large\n          extraLarge\n        }\n        duration\n        genres\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetAnime($page: Int, $perPage: Int) {\n    Page(page: $page, perPage: $perPage) {\n      pageInfo {\n        total\n        perPage\n        currentPage\n        lastPage\n        hasNextPage\n      }\n      media(sort: SCORE_DESC, type: ANIME) {\n        id\n        rankings {\n        allTime\n        rank\n        format\n        context\n       }\n        title {\n          romaji\n          english\n          native\n        }\n        coverImage {\n          color\n          large\n          extraLarge\n        }\n        duration\n        genres\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

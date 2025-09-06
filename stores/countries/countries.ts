@@ -1,4 +1,5 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
+import { createGate } from 'effector-react';
 import { GET_COUNTRIES } from '@/graphql/countriesQueries';
 import { GetCountriesQuery } from '@/graphql/generated/graphql';
 import { countriesClient } from '@/lib/apollo';
@@ -9,8 +10,9 @@ export interface CountriesState {
   error: string | null;
 }
 
-export const fetchCountries = createEvent();
 export const setError = createEvent<string | null>();
+
+export const CountriesGate = createGate();
 
 export const fetchCountriesFx = createEffect(async () => {
   const result = await countriesClient.query<GetCountriesQuery>({
@@ -46,7 +48,7 @@ export const $countries = createStore<CountriesState>({
 export const $isLoading = fetchCountriesFx.pending.map((isPending) => isPending);
 
 sample({
-  clock: fetchCountries,
+  clock: CountriesGate.open,
   target: fetchCountriesFx,
 });
 

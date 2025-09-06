@@ -1,6 +1,6 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
 import { createGate } from 'effector-react';
-import { GET_ANIME } from '@/graphql/animeQueries';
+import { GET_ANIME_All } from '@/graphql/animeQueries';
 import { Page, Media } from '@/graphql/generated/graphql';
 import { anilistClient } from '@/lib/apollo';
 
@@ -11,11 +11,12 @@ export interface AnimeState {
 
 export const setError = createEvent<string | null>();
 
-export const AnimeGate = createGate();
+export const AnimeAllGate = createGate<{ page?: number; perPage?: number }>();
 
-export const fetchAnimeFx = createEffect(async () => {
+export const fetchAnimeFx = createEffect(async (params: { page?: number; perPage?: number } = {}) => {
     const result = await anilistClient.query<{ Page: Page }>({
-        query: GET_ANIME,
+        query: GET_ANIME_All,
+        variables: params,
     });
 
     if (!result.data?.Page?.media) {
@@ -47,6 +48,6 @@ export const $anime = createStore<AnimeState>({
 export const $isLoading = fetchAnimeFx.pending;
 
 sample({
-    clock: AnimeGate.open,
+    clock: AnimeAllGate.open,
     target: fetchAnimeFx,
 });

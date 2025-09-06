@@ -9,20 +9,18 @@ import {
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAnime } from "@/stores/anime/useAnime";
+import Link from "next/link";
 
 const PopularShows = () => {
   const { data: anime, loading } = useAnime();
 
   return (
     <section className="space-y-11 pb-10 w-full">
-      <div className="pt-14 px-20 font-nunito flex justify-between">
+      <div className="pt-14 xl:px-20 px-6 font-nunito flex justify-between">
         <h3 className="text-2xl font-medium text-white">
           <Play className="fill-green-500 text-green-500 inline mr-3" />
           Popular Shows
         </h3>
-        <span className="text-green-500 underline text-lg font-medium">
-          View all
-        </span>
       </div>
       <Carousel
         opts={{
@@ -32,7 +30,7 @@ const PopularShows = () => {
         }}
         plugins={[
           Autoplay({
-            delay: 5000,
+            delay: 3000,
             stopOnInteraction: true,
           }),
         ]}
@@ -54,16 +52,25 @@ const PopularShows = () => {
                   key={item.id}
                   className="basis-[260px] pl-10 font-nunito"
                 >
-                  <Image
-                    src={item?.coverImage?.large || ""}
-                    width={224}
-                    height={320}
-                    alt={item?.title?.english || item?.title?.native || "anime"}
-                    className="object-cover w-full aspect-[11/16] mb-4 rounded-xl"
-                  />
-                  <span className="font-medium text-lg text-white">
-                    {item?.title?.english || item?.title?.native}
-                  </span>
+                  <Link
+                    href={`/anime/${item?.id}`}
+                    className="relative cursor-pointer group w-[224px] h-[320px]"
+                  >
+                    <Image
+                      src={item?.coverImage?.large || ""}
+                      width={224}
+                      height={320}
+                      alt={
+                        item?.title?.english || item?.title?.native || "anime"
+                      }
+                      className="object-cover w-full h-full rounded-xl"
+                    />
+                    <div className="absolute inset-0 flex items-end bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
+                      <span className="p-3 font-medium text-white text-lg">
+                        {item?.title?.english || item?.title?.native}
+                      </span>
+                    </div>
+                  </Link>
                 </CarouselItem>
               ))}
         </CarouselContent>
