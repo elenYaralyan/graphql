@@ -3,7 +3,7 @@ import Image from "next/image";
 const Hero = () => (
   <section className="relative bg-[url('/frame.png')] font-nunito lg:bg-top bg-fixed bg-center bg-cover min-h-screen h-full w-full">
     <div className="absolute -inset-0.5 bg-[radial-gradient(circle,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.59)_30%,rgba(0,0,0,1)_100%)] z-0" />
-    <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center text-white pt-[11.25rem] p-5 lg:pr-5 lg:pl-20 lg:pb-44">
+    <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center text-white pt-20 p-5 lg:pr-5 lg:pl-20 lg:pb-44">
       <div className="flex flex-col max-w-[41.25rem]">
         <h2 className="text-4xl font-nunito font-semibold mt-2">
           Welcome to{" "}
@@ -12,7 +12,7 @@ const Hero = () => (
         <p className="text-2xl font-normal">
           Embark on a Journey of Endless Stories and Epic Adventures.
         </p>
-        <div className="rounded-tr-[3.75rem] border border-zinc-400/20 rounded-bl-[3.75rem]  p-5 backdrop-blur-none bg-gradient-to-r from-neutral-900/70 via-zinc-900/60 to-neutral-600/50 space-y-3">
+        <div className="rounded-tr-[3.75rem] mt-4 border border-zinc-400/20 rounded-bl-[3.75rem]  p-5 backdrop-blur-none bg-gradient-to-r from-neutral-900/70 via-zinc-900/60 to-neutral-600/50 space-y-3">
           <h4 className="text-green-500 text-xl font-normal font-limelight mb-2">
             <span className="underline  ">Epic</span> Feed
           </h4>

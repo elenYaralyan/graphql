@@ -1,6 +1,6 @@
 import { Media } from "@/graphql/generated/graphql";
 
-export function getTrailerLink(trailer?: Media["trailer"]): string | null {
+export const getTrailerLink = (trailer?: Media["trailer"]): string | null => {
     if (!trailer || !trailer.id || !trailer.site) return null;
 
     if (trailer.site.toLowerCase() === "youtube") {

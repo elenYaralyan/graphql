@@ -1,13 +1,19 @@
 import { useUnit, useGate } from 'effector-react';
-import { $anime, $isLoading, AnimeAllGate } from './animeAll';
+import { $anime, $isLoading, AnimeAllGate, AnimeFilters } from './animeAll';
 
-export const useAnimeAll = (params?: { page?: number; perPage?: number }) => {
+interface UseAnimeAllParams {
+    page?: number;
+    perPage?: number;
+    filters?: AnimeFilters;
+}
+
+export const useAnimeAll = (params?: UseAnimeAllParams) => {
     const [animeState, loading] = useUnit([$anime, $isLoading]);
 
     useGate(AnimeAllGate, params);
 
     return {
         ...animeState,
-        loading
+        loading,
     };
 };

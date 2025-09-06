@@ -50,11 +50,11 @@ const PopularShows = () => {
             : anime.map((item) => (
                 <CarouselItem
                   key={item.id}
-                  className="basis-[260px] pl-10 font-nunito"
+                  className="basis-[260px] max-h-[320px] pl-10 font-nunito"
                 >
                   <Link
                     href={`/anime/${item?.id}`}
-                    className="relative cursor-pointer group w-[224px] h-[320px]"
+                    className="relative cursor-[url(/star.png),_pointer] group w-[224px]"
                   >
                     <Image
                       src={item?.coverImage?.large || ""}

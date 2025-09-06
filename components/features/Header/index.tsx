@@ -22,7 +22,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 w-full pt-6 px-6 flex items-center justify-between z-50 backdrop-blur-md bg-black/40">
+    <header className="sticky top-0 w-full py-4 px-6 flex items-center justify-between z-50 backdrop-blur-md bg-black/40">
       <Link href="/">
         <Image src="/logo.svg" alt="Logo" width={140} height={36} />
       </Link>
