@@ -1,17 +1,17 @@
 import { useUnit } from 'effector-react';
 import { $anime, $isLoading, fetchAnime } from './anime';
+import { useEffect } from 'react';
 
 export const useAnime = () => {
     const [animeState, loading] = useUnit([$anime, $isLoading]);
-    console.log(animeState, loading, "useAnime state");
-
     const fetchAnimeEvent = useUnit(fetchAnime);
-    const refetch = () => {
+
+    useEffect(() => {
         fetchAnimeEvent();
-    };
+    }, [fetchAnimeEvent]);
+
     return {
         ...animeState,
-        loading,
-        refetch
+        loading
     };
 };

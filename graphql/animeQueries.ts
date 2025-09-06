@@ -10,10 +10,18 @@ export const GET_ANIME = gql`query {
       }
       title {
         english
+        native
       }
       bannerImage
       description
       id
+      genres
+      trending
+      trailer {
+        thumbnail
+        site
+        id
+      }
     }
   }
 }`;

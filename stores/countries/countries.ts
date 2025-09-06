@@ -1,8 +1,8 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
 import { GET_COUNTRIES } from '@/graphql/countriesQueries';
-import { navigationTriggered } from '../router';
 import { GetCountriesQuery } from '@/graphql/generated/graphql';
 import { countriesClient } from '@/lib/apollo';
+import { navigationTriggered } from '@/router';
 
 export interface CountriesState {
   data: GetCountriesQuery["countries"];
@@ -16,7 +16,6 @@ export const fetchCountriesFx = createEffect(async () => {
   const result = await countriesClient.query<GetCountriesQuery>({
     query: GET_COUNTRIES,
   });
-  console.log(result?.data, "result?.data");
 
   if (!result.data?.countries) {
     throw new Error('Failed to fetch countries data');
